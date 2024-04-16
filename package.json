@@ -1,0 +1,27 @@
+{
+  "name": "book_store_app_integration_testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index",
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "books.json"
+    ]
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  }
+}
