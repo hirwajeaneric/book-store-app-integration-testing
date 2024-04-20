@@ -30,7 +30,7 @@ describe("Integration tests for the books API", () => {
         expect(statusCode).toBe(400);
         expect(body).toEqual({
             errors: [
-                { 
+                {
                     location: "body",
                     msg: "Book name is required",
                     path: "name",
@@ -41,12 +41,41 @@ describe("Integration tests for the books API", () => {
         });
     });
 
-    if("POST /api/books - success", async () => {
+    it("POST /api/books - success", async () => {
         const { body, statusCode } = await request(app).post('/api/books').send({
             name: "Pay off",
             author: "John Travolta"
         });
         expect(statusCode).toBe(200);
         expect(body).toEqual({ message: "Success" });
+    });
+
+    // it("GET /api/books - Find by id (Check parameter)", async () => {
+    //     let parameter = 1;
+    //     expect(typeof parameter).toBe("number");
+    // });
+
+    it("GET /api/books - Find by id - Success", async () => {
+        let parameter = "1";
+
+        const { body, statusCode } = await request(app).get(`/api/books/findById?id=${parameter}`);
+        
+        let expectedStatusCode = 200;
+        let expectedResponseBody = { "name": "Call of the wild", "author": "Louis wilder", "id": 1 }
+        
+        expect(statusCode).toBe(expectedStatusCode);
+        expect(body).toEqual(expectedResponseBody);
+    });
+    
+    it("GET /api/books - Find by id - Not found", async () => {
+        let parameter = "0";
+
+        const { body, statusCode } = await request(app).get(`/api/books/findById?id=${parameter}`);
+        
+        let expectedStatusCode = 404;
+        let expectedResponseBody = { message: "Book not found!" };
+        
+        expect(statusCode).toBe(expectedStatusCode);
+        expect(body).toEqual(expectedResponseBody);
     });
 })
