@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "test": "jest --watchAll"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
