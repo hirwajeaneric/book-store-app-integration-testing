@@ -6,6 +6,24 @@ const app = express();
 app.use(express.json());
 app.use("/api/books", bookRoutes);
 
+jest.mock('../data/books.json', () => [
+    {
+        "name": "Call of the wild",
+        "author": "Louis wilder",
+        "id": 1
+    },
+    {
+        "name": "Love like no other",
+        "author": "Charlie Bronsey",
+        "id": 2
+    },
+    {
+        "name": "Dream",
+        "author": "Jamie Phillips",
+        "id": 3
+    }
+]);
+
 describe("Integration tests for the books API", () => {
     it("GET /api/books - success - get all the books", async () => {
         const { body, statusCode } = await request(app).get('/api/books');
